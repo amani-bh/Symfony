@@ -1,0 +1,33 @@
+{% extends '/FrontOffice/base.html.twig' %}
+{% block body %}
+    <!-- Hero Area Start-->
+    <div class="slider-area ">
+        <div class="single-slider slider-height2 d-flex align-items-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="hero-cap text-center">
+                            <h2>Report</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Hero Area End-->
+<div class="container">
+    <div class="row offset-5">
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+        <div class="form-group">
+            <label class="offset-2">Type your report</label>
+            {{ form_widget(form.note, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.note) }}
+        </div>
+        <div class="form-group">
+            {{ form_widget(form.report, {'attr': {'class': 'btn hero-btn'}}) }}
+        </div>
+    {{ form_end(form) }}
+    </div>
+</div>
+   
+{% endblock %}

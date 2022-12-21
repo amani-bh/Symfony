@@ -1,0 +1,112 @@
+{% extends '/FrontOffice/base.html.twig' %}
+
+{% block body %}
+    <!-- Hero Area Start-->
+    <div class="slider-area ">
+        <div class="single-slider slider-height2 d-flex align-items-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="hero-cap text-center">
+                            <h2>All services</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Hero Area End-->
+    <section class="property-section latest-property-section spad">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-5">
+                    <div class="section-title">
+                        <h4>Latest Services</h4>
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="property-controls">
+                        <ul>
+                            <li data-filter="all">All</li>
+                            <li data-filter=".event">Events</li>
+                            <li data-filter=".task">Tasks</li>
+                            <li data-filter=".book">Books</li>
+                            <li data-filter=".recipe">Recipes</li>
+                            <li data-filter=".session">Sessions</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row property-filter">
+                {% set classType="col-lg-4 col-md-6 mix all event" %}
+                {% set img='assets/img/portfolio/portfolio-3.jpg' %}
+                {% set bookid=0 %}
+                {% for all in allItems %}
+                    {% if all.className=='Book' %}
+                        {% set bookid=all.id %}
+                        {% set classType="col-lg-4 col-md-6 mix all book" %}
+                        {% set img='assets/img/book.jpg' %}
+                    {% elseif all.className=='Event' %}
+                        {% set classType="col-lg-4 col-md-6 mix all event" %}
+                        {% set img='assets/img/event.jpg' %}
+                    {% elseif all.className=='Task' %}
+                        {% set classType="col-lg-4 col-md-6 mix all task" %}
+                        {% set img='assets/img/task.jpg' %}
+                    {% elseif all.className=='Session' %}
+                        {% set classType="col-lg-4 col-md-6 mix all session" %}
+                        {% set img='assets/img/session.png' %}
+                    {% elseif all.className=='Recipe' %}
+                        {% set classType="col-lg-4 col-md-6 mix all recipe" %}
+                        {% set img='assets/img/recipe1.jpg' %}
+                    {% endif %}
+                    <div class="{{ classType }}">
+                        <div class="property-item">
+                            {% if all.className!='Session' %}
+                            <div class="pi-pic set-bg" data-setbg="{{ asset('assets/img/'~all.className|lower ~'/'~all.imgUrl) }}">
+                                <div class="label">{{ all.className }}</div>
+                            </div>
+                            {% else %}
+                                <div class="pi-pic set-bg" data-setbg="../assets/others/img/property/property-1.jpg">
+                                    <div class="label">{{ all.className }}</div>
+                                </div>
+                                {% endif %}
+
+                            <div class="pi-text">
+                                <div class="pt-price" id="book{{ all.id }}">$ 289.0<span>/month</span></div>
+                                <h5><a href="{{ path ('details', {'type':all.className|lower, 'id':all.id}) }}">{{ all.title }}</a></h5>
+                                <p><span class="icon_pin_alt"></span> 3 Middle Winchendon Rd, Rindge, NH 03461</p>
+                                <ul>
+                                    <li><i class="fa fa-object-group"></i> 2, 283</li>
+                                    <li><i class="fa fa-bathtub"></i> 03</li>
+                                    <li><i class="fa fa-bed"></i> 05</li>
+
+                                </ul>
+                                <div class="pi-agent">
+                                    <div class="pa-item">
+                                        <div class="pa-info">
+                                            <img src="../assets/others/img/property/posted-by/pb-1.jpg" alt="">
+                                            <h6>Ashton Kutcher</h6>
+                                        </div>
+                                        <div class="pa-text">
+                                            123-455-688
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+
+            </div>
+
+        </div>
+    </section><!-- End Portfolio Section -->
+    <script>
+        {% for all in allItems %}
+            var id = document.getElementById("book{{ all.id }}");
+            console.log(id);
+        {% endfor %}
+    </script>
+{% endblock %}

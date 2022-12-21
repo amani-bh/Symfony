@@ -1,0 +1,353 @@
+{% extends 'FrontOffice/base.html.twig' %}
+{% block body %}
+    <!-- Start Main -->
+    <main>
+    <style>
+        #hr {
+            width: 100%;
+            height: 76vh;
+            background: url("/assets/img/recipe/rbb.jpg") center center;
+            background-size: cover;
+            position: relative;
+        }
+        #hr .container {
+            padding-top: 80px;
+        }
+
+        #hr:before {
+            content: "";
+            background: rgba(0, 0, 0, 0.6);
+            position: absolute;
+            bottom: 0;
+            top: 0;
+            left: 0;
+            right: 0;
+        }
+
+        #hr h1 {
+            margin: 0 0 10px 0;
+            font-size: 48px;
+            font-weight: 700;
+            line-height: 56px;
+            color: #fff;
+        }
+
+        #hr h2 {
+            color: #eee;
+            margin-bottom: 40px;
+            font-size: 15px;
+            font-weight: 500;
+            font-family: "Open Sans", sans-serif;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        #hr .btn-get-started {
+            font-family: "Poppins", sans-serif;
+            text-transform: uppercase;
+            font-weight: 500;
+            font-size: 14px;
+            letter-spacing: 1px;
+            display: inline-block;
+            padding: 12px 28px;
+            transition: 0.5s;
+            margin: 10px;
+            border: 2px solid #fff;
+            color: #fff;
+        }
+
+        #hr .btn-get-started:hover {
+            background: #0b517d;
+            border: 2px solid #0b517d;
+        }
+
+        @media (min-width: 1024px) {
+            #hr {
+                background-attachment: fixed;
+            }
+        }
+
+        @media (max-width: 768px) {
+            #hr {
+                height: 100vh;
+            }
+            #hr .container {
+                padding-top: 60px;
+            }
+            #hr h1 {
+                font-size: 200px;
+                line-height: 36px;
+            }
+        }
+        .banner {
+            position: relative;
+            height: 210px;
+            background-image: url("/assets/img/recipe/jjjk.jpg");
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+    </style>
+
+    <section id="hr" class="d-flex align-items-center">
+        <div class="container text-center position-relative" data-aos="fade-in" data-aos-delay="200">
+            <font color="#fff" size="130">Recipes</font><br><br><br
+            {% if is_granted('ROLE_Nutritionist') %}
+                <a href="{{ path('addRecipe')}}" class="btn-get-started scrollto">Add new Recipe</a>
+            {% endif %}
+            <br>
+
+        </div>
+    </section>
+    <br><br>
+    <div class="row justify-content-center mb-5 pb-2">
+        <div class="col-md-7 text-center heading-section ftco-animate">
+            <span class="subheading">Specialties</span>
+            <h2>Only the healthy for you </h2>
+        </div>
+    </div><br><br>
+    <div class="banner"></div>
+    <!--================Checkout Area =================-->
+    <!-- Latest Products Start -->
+    <section class="popular-items latest-padding">
+    <div class="container">
+    <div class="row product-btn justify-content-between mb-40">
+
+        <!-- Grid and List view -->
+        <div class="grid-list-view">
+        </div>
+        <!-- Select items -->
+        <div class="select-this">
+            <form action="#">
+                <div class="select-itms">
+                    <select name="select" id="select1">
+                        <option value="">10 per page</option>
+                        <option value="">20 per page</option>
+                        <option value="">30 per page</option>
+                    </select>
+                </div>
+            </form>
+        </div>
+    </div>
+    <style>
+        .team {
+            background: #fff;
+        }
+
+        .team .member {
+            box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .team .member .pic {
+            overflow: hidden;
+            width: 180px;
+            margin: 0 auto 20px auto;
+            border: 2px solid #f4952f;
+            border-radius: 10px;
+        }
+
+        .team .member .pic img {
+            transition: ease-in-out 0.3s;
+        }
+
+        .team .member:hover img {
+            transform: scale(1.1);
+        }
+
+        .team .member h4 {
+            font-weight: 700;
+            margin-bottom: 5px;
+            font-size: 20px;
+            color: #36343a;
+        }
+
+        .team .member span {
+            display: block;
+            font-size: 15px;
+            padding-bottom: 10px;
+            position: relative;
+            font-weight: 500;
+        }
+
+        .team .member span::after {
+            content: '';
+            position: absolute;
+            display: block;
+            width: 50px;
+            height: 1px;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .team .member p {
+            margin: 10px 0 0 0;
+            font-size: 14px;
+        }
+
+        .team .member .social a {
+            transition: ease-in-out 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50px;
+            width: 32px;
+            height: 32px;
+        }
+
+        .team .member .social a i {
+            color: #fff;
+            font-size: 16px;
+            margin: 0 2px;
+        }
+
+        .team .member .social a + a {
+            margin-left: 8px;
+        }
+
+        input, select {
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        input {
+            width: 350px;
+            padding: 5px;
+        }
+        .view-btn {
+            display: inline-block;
+            font-size: 14px;
+            padding: 12px 30px 12px;
+            color: #111111;
+            text-transform: uppercase;
+            font-weight: 700;
+            border: 1px solid #f4952f;
+            background: #f4952f;
+        }
+        nobr { white-space: nowrap }
+
+    </style>
+
+    <!-- ======= Recipes Section ======= -->
+    <section id="team" class="team">
+        <div class="container">
+            <div class="row">
+                {% for recipe in recipes %}
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
+                        <div class="member" data-aos="zoom-in" data-aos-delay="100">
+                            <div class="pic">
+                                <img src="{{ asset('assets/img/recipe/' ~ recipe.imgUrl)}}" class="img-fluid" alt=""></div>
+                            <div class="member-info">
+                                <h3>{{ recipe.title }}</h3>
+                                <p>{{ recipe.description }}</p>
+                                <br>
+                                <span>
+                                   <img src="/assets/img/recipe/burn.png" width="18" height="18">
+                                    {{ recipe.calories }}
+                                     &nbsp;
+                                    <img src="/assets/img/recipe/dur.png" width="24" height="24">
+                                     {{ recipe.duration }}
+                                     &nbsp;
+                                    <img src="/assets/img/recipe/per.png" width="30" height="30">
+                                     {{ recipe.persons }}
+                                </span>
+                                <br>
+                                <div class="view-btn">
+                                    <a href="{{ path('recipeDetails' ,{'idr':recipe.recipeId})}}">Show details</a>
+                                </div>
+                                <br><br>   <span class="nobr">
+                                       <nobr>
+                                             <h5  class="fa fa-thumbs-up" id="dislike{{ recipe.recipeId }}" style="display:{% if recipe.isLikedByUser(app.user)%} inline;cursor: pointer {% else %} none;cursor: pointer {% endif %}">
+                                               </h5>
+                                             <h5 class="fa fa-thumbs-o-up" id="like{{ recipe.recipeId }}" style="display:{% if recipe.isLikedByUser(app.user)%} none;cursor: pointer {% else %} inline;cursor: pointer {% endif %}">
+                                               </h5>
+                                             <h5 id="count{{ recipe.recipeId }}"> {{ recipe.likes | length }} </h5>
+                                       </nobr>
+                                           </span>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section><!-- End Recipes Section -->
+    <script>
+        var like=[];
+        var dislike=[];
+        var count=[];
+        var id=[];
+        var urlLike=[];
+        var urlUnLike=[];
+        var urlCount=[];
+        {% set i=0 %}
+        {% for recipe in recipes %}
+        like[{{ i }}] = document.getElementById("like{{ recipe.recipeId }}");
+        dislike[{{ i }}] = document.getElementById("dislike{{ recipe.recipeId }}");
+        count[{{ i }}]=document.getElementById("count{{ recipe.recipeId }}");
+        id[{{ i }}]={{ recipe.recipeId }};
+        var i = {{ i }};
+        console.log(like[i]);
+        console.log(id[i]);
+
+
+
+        urlLike[i] = '{{ path('addLike', {'id':'id'}) }}';
+        urlLike[i] = urlLike[i].replace("id", id[i]);
+        urlUnLike[i] = '{{ path('dislike', {'id':'id'}) }}';
+        urlUnLike[i] = urlUnLike[i].replace("id", id[i]);
+        urlCount[i] = '{{ path('count', {'id':'id'}) }}';
+        urlCount[i] = urlCount[i].replace("id", id[i]);
+
+
+        addOnClick(
+            like[i],
+            dislike[i],
+            urlLike[i],
+            count[i]
+        );
+
+        addOnClick(
+            dislike[i],
+            like[i],
+            urlUnLike[i],
+            count[i]
+        );
+        {% set i=i+1 %}
+        {% endfor %}
+
+        function switchIcons(icon, oppositeIcon){
+            icon.disabled=false;
+            icon.style.display='none';
+            oppositeIcon.style.display='inline';
+        }
+
+        function addOnClick(icon, oppositeIcon, path, nb){
+            icon.addEventListener('click', function (event){
+                {% if not app.user %}
+                return window.location.replace('{{ path('app_login') }}')
+                {% endif %}
+                icon.disabled=true;
+                if(icon.className==='fa fa-thumbs-o-up')
+                    nb.innerText = parseInt(nb.textContent)+1;
+                else
+                    nb.innerText = parseInt(nb.textContent)-1;
+                switchIcons(icon,oppositeIcon);
+                fetch(path, {'credentials':'include'}).then(function (response){
+                    response.json().then(function (json){
+                        nb.innerText=json.count.count;
+                    })
+                }).catch(function (){
+                    switchIcons(icon,oppositeIcon);
+                });
+                event.preventDefault();
+            });
+        }
+    </script>
+
+
+{% endblock %}

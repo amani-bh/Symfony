@@ -1,0 +1,69 @@
+{% extends '/FrontOffice/base.html.twig' %}
+
+{% block body %}
+    <!-- Start Main -->
+    <main>
+        <!-- Hero Area Start-->
+        <div class="slider-area ">
+            <div class="single-slider slider-height2 d-flex align-items-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="hero-cap text-center">
+                                <h2>Checkout</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--================Checkout Area =================-->
+        <section class="checkout_area section_padding">
+            <div class="container">
+                <div class="billing_details">
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <h3>Task Details</h3>
+
+                            {{ form_start(form,{ 'attr':{'novalidate':'novalidate'}}) }}
+                            <div class="col-md-6 form-group p_star">
+                                {{ form_row(form.Title, { 'attr': {'class': 'form-control'} }) }}
+                            </div>
+                            <div class="col-md-6 form-group p_star">
+                                {{ form_row(form.Description ,{ 'attr': {'class': 'form-control'} }) }}
+                            </div>
+                            <div class="col-md-12 form-group">
+                                {{ form_row(form.numOfDays,{ 'attr': {'class': 'form-control'} }) }}
+                            </div>
+
+
+                            <div class="col-md-12 form-group p_star">
+                                {{ form_row(form.Cat,{ 'attr': {'class': 'country_select'} }) }}
+
+                            </div>
+                            <div class="col-md-12 form-group p_star">
+                                {{ form_row(form.ImgUrl,{ 'attr': {'class': 'form-control'} }) }}
+                            </div>
+                            <div class="col-md-12 form-group p_star">
+                                {{ form_row(form.type) }}
+                            </div>
+                            <div class="col-md-12 form-group p_star">
+                                {{ form_row(form.price,{ 'attr': {'class': 'form-control'} }) }}
+                            </div>
+
+                            {{ form_row(form.add,{ 'attr': {'class': 'btn_3'} }) }}
+                            {{ form_end(form) }}
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!--================End Checkout Area =================-->
+    </main>
+    <!-- End Main -->
+
+{% endblock %}

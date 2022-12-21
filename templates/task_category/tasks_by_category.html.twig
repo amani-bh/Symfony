@@ -1,0 +1,108 @@
+{% extends '/FrontOffice/base.html.twig' %}
+
+{% block body %}
+    <!-- Hero Area Start-->
+    {% set category='' %}
+    {% set img='' %}
+    {% for all in tasks %}
+        {% set category=all.cat.name %}
+        {% set img=all.cat.imgUrl %}
+    {% endfor %}
+    <div class="slider-area ">
+        <div class="">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="hero-cap text-center">
+                            <img src=" {{ asset('assets/img/task/'~img) }}" width="1000" height="300" >
+                            <h2>{{ category }}</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Hero Area End-->
+    <section class="property-section latest-property-section spad">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-5">
+                    <div class="section-title">
+                        {% if is_granted('ROLE_Therapist') %}
+                            <h4> <a style="color: black" href="{{ path('add_task')}}">Create new task</a></h4>
+                        {% else %}
+                            <h4> <a style="color: black" href="{{ path('add_task')}}">All Tasks</a></h4>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="property-controls">
+                        <ul>
+                            <li data-filter="all">All</li>
+                            <li data-filter=".paid">Paid</li>
+                            <li data-filter=".task">Free</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row property-filter">
+                {% set classType="col-lg-4 col-md-6 mix all event" %}
+                {% set img='assets/img/portfolio/portfolio-3.jpg' %}
+                {% set price=0 %}
+                {% for all in tasks %}
+
+                    {% if all.type=='paid' %}
+                        {% set classType="col-lg-4 col-md-6 mix all paid" %}
+                        {% set img='assets/img/event.jpg' %}
+                    {% elseif all.className=='Task' %}
+                        {% set classType="col-lg-4 col-md-6 mix all task" %}
+                        {% set img='assets/img/task.jpg' %}
+
+                    {% endif %}
+
+                    <div class="{{ classType }}">
+                        <div class="property-item">
+                            <div class="pi-pic set-bg" data-setbg="">
+                                <img src=" {{ asset('assets/img/task/'~all.imgUrl) }}" width="360px" height="240px">
+                                <div class="label">{{ all.className }}</div>
+                            </div>
+                            <div class="pi-text">
+                                <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
+
+                                {% for paidtask in paid %}
+
+                                    {% if all.id==paidtask.task.id %}
+                                        {% set price=paidtask.price %}
+                                    {% endif %}
+                                {% endfor %}
+                                {%  if all.type=='paid'  %}
+                                    <div class="pt-price">{{ price }}<span>Dt</span></div>
+
+                                {% else  %}
+                                    <div class="pt-price">Free</div>
+                                {% endif %}
+                                <h5><a href="{{ path('task_details' ,{'idt':all.id})}}">{{ all.title }}</a></h5>
+
+                                <div class="pi-agent">
+                                    <div class="pa-item">
+                                        <div class="pa-info">
+                                            <img src="../assets/others/img/property/posted-by/pb-1.jpg" alt="">
+                                            <h6>{{ all.u.firstName }} {{ all.u.lastName }}</h6>
+                                        </div>
+                                        <div class="pa-text">
+                                            {{ all.createdAt }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+
+            </div>
+
+        </div>
+    </section><!-- End Portfolio Section -->
+{% endblock %}

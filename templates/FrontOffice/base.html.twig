@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html class="no-js" lang="zxx">
+<head>
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="shortcut icon" type="image/x-icon" href="../assets/img/favicon.ico">
+    
+    {% block stylesheets %} 
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=RocknRoll+One">
+        <!-- CSS here -->
+        <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../assets/css/owl.carousel.min.css">
+        <link rel="stylesheet" href="../assets/css/flaticon.css">
+        <link rel="stylesheet" href="../assets/css/slicknav.css">
+        <link rel="stylesheet" href="../assets/css/animate.min.css">
+        <link rel="stylesheet" href="../assets/css/magnific-popup.css">
+        <link rel="stylesheet" href="../assets/css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="../assets/css/themify-icons.css">
+        <link rel="stylesheet" href="../assets/css/slick.css">
+        <link rel="stylesheet" href="../assets/css/nice-select.css">
+        <link rel="stylesheet" href="../assets/css/style.css">
+        <link rel="stylesheet" href="../assets/others/css/style.css" type="text/css">
+        <link rel="stylesheet" href="../assets/others/css/font-awesome.min.css" type="text/css">
+        <link rel="stylesheet" href="../assets/others/css/elegant-icons.css" type="text/css">
+        <link id="pagestyle" href="../assets/css/soft-ui-dashboard.css?v=1.0.1" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.0/main.min.css" integrity="sha256-uq9PNlMzB+1h01Ij9cx7zeE2OR2pLAfRw3uUUOOPKdA=" crossorigin="anonymous">
+
+
+        <style>
+            *{
+                font-family: 'RocknRoll One';
+            }
+            .myclass{
+                background-image:  linear-gradient(to right top, #13547a, #1f7190, #398fa3, #59adb4, #7fcbc3);
+                font-size: 50px;
+                font-weight: bold;
+                font-family: 'RocknRoll One';
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+            .fa-stack[data-count]:after{
+                position:absolute;
+                right:-7px;
+                top:25px;
+                content: attr(data-count);
+                font-size:10px;
+                padding:.6em;
+                border-radius:999px;
+                line-height:.75em;
+                color: white;
+                background:rgba(255,0,0,.85);
+                text-align:center;
+                min-width:2em;
+                font-weight:bold;
+            }
+
+        </style>
+    {% endblock %}
+
+
+</head>
+<body>
+<!--? Preloader Start -->
+<div id="preloader-active">
+    <div class="preloader d-flex align-items-center justify-content-center">
+        <div class="preloader-inner position-relative">
+            <div class="preloader-circle"></div>
+            <div class="preloader-img pere-text">
+                <img src="../assets/img/logo/logo.png" alt="">
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Preloader Start -->
+
+<!-- ======= Header ======= -->
+<header>
+    <!-- Header Start -->
+    <div class="header-area">
+        <div class="main-header header-sticky">
+            <div class="container-fluid">
+                <div class="menu-wrapper">
+                    <!-- Logo -->
+                    <div class="logo">
+                        <a href="{{ path ('home') }}"><h2 class="myclass">CoHeal</h2></a>
+                    </div>
+                    <!-- Main-menu -->
+                    <div class="main-menu d-none d-lg-block">
+                        <nav>
+                            <ul id="navigation">
+                                <li><a href="{{ path ('home') }}">Home</a></li>
+                                <li class="hot"><a href="{{ path ('all') }}">Latest</a></li>
+                                <li>
+                                    <a href="#">Services</a>
+                                    <ul class="submenu">
+                                        <li><a href="{{ path ('all_task') }}"> Tasks</a></li>
+                                        <li><a href="{{ path ('book') }}"> Books</a></li>
+                                        <li><a href="{{ path ('recipeHome') }}"> Recipes</a></li>
+                                        <li><a href="{{ path ('all_event') }}"> Events</a></li>
+                                        <li><a href="{{ path ('Session') }}"> Sessions</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="{{ path ('about') }}">about</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <!-- Header Right -->
+                    <div class="header-right">
+                        <ul>
+                            <li> <a href="{{ path ('myfavorites') }}"><span class="fa fa-heart-o"></span></a></li>
+                            <li> <a href="{{ path ('profile_user') }}"><span class="fa fa-user-o"></span></a></li>
+                            {% if app.user %}
+                                <li><a href="{{ path ('app_logout') }}"><span class="fa fa-sign-out"></span></a> </li>
+                                <li class="nav-item dropdown">
+                                    <a href="" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span class="fa-stack has-badge" id="notificationCount">
+                                        <i class="fa fa-bell-o fa-stack"></i>
+                                    </span>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu- px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton" id="dropdown">
+                                        <script>
+                                            function time_ago(time) {
+
+                                                switch (typeof time) {
+                                                    case 'number':
+                                                        break;
+                                                    case 'string':
+                                                        time = +new Date(time);
+                                                        break;
+                                                    case 'object':
+                                                        if (time.constructor === Date) time = time.getTime();
+                                                        break;
+                                                    default:
+                                                        time = +new Date();
+                                                }
+                                                var time_formats = [
+                                                    [60, 'seconds', 1], // 60
+                                                    [120, '1 minute ago', '1 minute from now'], // 60*2
+                                                    [3600, 'minutes', 60], // 60*60, 60
+                                                    [7200, '1 hour ago', '1 hour from now'], // 60*60*2
+                                                    [86400, 'hours', 3600], // 60*60*24, 60*60
+                                                    [172800, 'Yesterday', 'Tomorrow'], // 60*60*24*2
+                                                    [604800, 'days', 86400], // 60*60*24*7, 60*60*24
+                                                    [1209600, 'Last week', 'Next week'], // 60*60*24*7*4*2
+                                                    [2419200, 'weeks', 604800], // 60*60*24*7*4, 60*60*24*7
+                                                    [4838400, 'Last month', 'Next month'], // 60*60*24*7*4*2
+                                                    [29030400, 'months', 2419200], // 60*60*24*7*4*12, 60*60*24*7*4
+                                                    [58060800, 'Last year', 'Next year'], // 60*60*24*7*4*12*2
+                                                    [2903040000, 'years', 29030400], // 60*60*24*7*4*12*100, 60*60*24*7*4*12
+                                                    [5806080000, 'Last century', 'Next century'], // 60*60*24*7*4*12*100*2
+                                                    [58060800000, 'centuries', 2903040000] // 60*60*24*7*4*12*100*20, 60*60*24*7*4*12*100
+                                                ];
+                                                var seconds = (+new Date() - time) / 1000,
+                                                    token = 'ago',
+                                                    list_choice = 1;
+
+                                                if (seconds == 0) {
+                                                    return 'Just now'
+                                                }
+                                                if (seconds < 0) {
+                                                    seconds = Math.abs(seconds);
+                                                    token = 'from now';
+                                                    list_choice = 2;
+                                                }
+                                                var i = 0,
+                                                    format;
+                                                while (format = time_formats[i++])
+                                                    if (seconds < format[0]) {
+                                                        if (typeof format[2] == 'string')
+                                                            return format[list_choice];
+                                                        else
+                                                            return Math.floor(seconds / format[2]) + ' ' + format[1] + ' ' + token;
+                                                    }
+                                                return time;
+                                            }
+                                            function unreadCount(){
+                                                fetch(
+                                                    '{{ path('unread_count_user') }}',
+                                                    {'credentials':'include'}
+                                                ).then(function (response){
+                                                    response.json().then(function (json){
+                                                        if(json.count>0) {
+                                                            document.getElementById('notificationCount').setAttribute("data-count", ""+json.count+"");
+
+                                                            document.getElementById('dropdown').innerHTML="";
+
+                                                            for(var i = 0; i < json.unread.length; i++) {
+                                                                var obj = json.unread[i];
+                                                                var notifDate = obj.date;
+                                                                li =
+                                                                    "<li class='mb-2'>" +
+                                                                    "<a class='dropdown-item border-radius-md' href='javascript:;'>" +
+                                                                    "<div class='d-flex py-1'>" +
+                                                                    "<div class='my-auto'>" +
+                                                                    "<img src='../assets/img/team-2.jpg' class='avatar avatar-sm  me-3'>" +
+                                                                    "</div>" +
+                                                                    "<div class='d-flex flex-column justify-content-center'>" +
+                                                                    "<h6 class='text-sm font-weight-normal mb-1'>" +
+                                                                    "<span class='font-weight-bold'>Your report is closed</span>" + obj.report +
+                                                                    "</h6>" +
+                                                                    "<p class='text-xs text-secondary mb-0'>" +
+                                                                    "<i class='fa fa-clock me-1'></i>" +
+                                                                    time_ago(notifDate * 1000) +
+                                                                    "</p>" +
+                                                                    "</div>" +
+                                                                    "</div>" +
+                                                                    "</a>" +
+                                                                    "</li>";
+                                                                document.getElementById('dropdown').insertAdjacentHTML('afterbegin', li);
+                                                            }
+                                                            var url = '{{ path('markall_user') }}';
+                                                            li ="<li class='mb-2'>" +
+                                                                "<a class='dropdown-item border-radius-md' href="+url+">" +
+                                                                "<div class='d-flex flex-column justify-content-center'>" +
+                                                                "<h6 class='text-sm-center font-weight-normal mb-1'>" +
+                                                                "<span class='font-weight-bold justify-content-center'>Mark all as read</span>"+
+                                                                "</h6>" +
+                                                                "</div>" +
+                                                                "</a>" +
+                                                                "</li>";
+                                                            document.getElementById('dropdown').insertAdjacentHTML('afterbegin', li);
+                                                            setTimeout(unreadCount, 5000);
+                                                        }
+                                                        else{
+                                                            document.getElementById('dropdown').innerHTML="";
+                                                            li =    "<li>" +
+                                                                "<h6 class='text-sm-center font-weight-normal mb-1'>" +
+                                                                "<span class='font-weight-bold'>No New Notification</span>"+
+                                                                "</h6>" +
+                                                                "</li>";
+                                                            document.getElementById('dropdown').insertAdjacentHTML('afterbegin', li);
+                                                            document.getElementById('notificationCount').removeAttribute("data-count");
+                                                            setTimeout(unreadCount, 5000);
+                                                        }
+                                                    });
+                                                }).catch(function (reason){
+
+                                                });
+                                            }
+                                            unreadCount();
+                                        </script>
+                                    </ul>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+                <!-- Mobile Menu -->
+                <div class="col-12">
+                    <div class="mobile_menu d-block d-lg-none"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Header End -->
+</header>
+<!-- End Header -->
+
+{% block body %}{% endblock %}
+<!-- ======= Footer ======= -->
+<footer>
+    <!-- Footer Start-->
+    <div class="footer-area footer-padding">
+        <div class="container">
+            <div class="row d-flex justify-content-between">
+                <div class="col-xl-3 col-lg-3 col-md-5 col-sm-6">
+                    <div class="single-footer-caption mb-50">
+                        <div class="single-footer-caption mb-30">
+                            <!-- logo -->
+                            <div class="footer-logo">
+                                <a href="{{ path ('home') }}"><img src="../assets/img/logo/logo2_footer.png" alt=""></a>
+                            </div>
+                            <div class="footer-tittle">
+                                <div class="footer-pera">
+                                    <p>Let's heal together with CoHeal</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-2 col-lg-3 col-md-3 col-sm-5">
+                    <div class="single-footer-caption mb-50">
+                        <div class="footer-tittle">
+                            <h4>Quick Links</h4>
+                            <ul>
+                                <li><a href="#">About</a></li>
+                                <li><a href="#"> Offers & Discounts</a></li>
+                                <li><a href="#"> Get Coupon</a></li>
+                                <li><a href="#">  Contact Us</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-7">
+                    <div class="single-footer-caption mb-50">
+                        <div class="footer-tittle">
+                            <h4>New Products</h4>
+                            <ul>
+                                <li><a href="#">Woman Cloth</a></li>
+                                <li><a href="#">Fashion Accessories</a></li>
+                                <li><a href="#"> Man Accessories</a></li>
+                                <li><a href="#"> Rubber made Toys</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-5 col-sm-7">
+                    <div class="single-footer-caption mb-50">
+                        <div class="footer-tittle">
+                            <h4>Support</h4>
+                            <ul>
+                                <li><a href="#">Frequently Asked Questions</a></li>
+                                <li><a href="#">Terms & Conditions</a></li>
+                                <li><a href="#">Privacy Policy</a></li>
+                                <li><a href="#">Report a Payment Issue</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Footer bottom -->
+            <div class="row align-items-center">
+                <div class="col-xl-7 col-lg-8 col-md-7">
+                    <div class="footer-copy-right">
+                        <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+                    </div>
+                </div>
+                <div class="col-xl-5 col-lg-4 col-md-5">
+                    <div class="footer-copy-right f-right">
+                        <!-- social -->
+                        <div class="footer-social">
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="https://www.facebook.com/sai4ull"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-behance"></i></a>
+                            <a href="#"><i class="fas fa-globe"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End-->
+</footer>
+<!-- End Footer -->
+<!--? Search model Begin -->
+<div class="search-model-box">
+    <div class="h-100 d-flex align-items-center justify-content-center">
+        <div class="search-close-btn">+</div>
+        <form class="search-model-form">
+            <input type="text" id="search-input" placeholder="Searching key.....">
+        </form>
+    </div>
+</div>
+<!-- Search model end -->
+
+{% block javascripts %}
+
+
+    <!-- Js Plugins -->
+    <script src="../assets/others/js/jquery-3.3.1.min.js"></script>
+    <script src="../assets/others/js/bootstrap.min.js"></script>
+    <script src="../assets/others/js/jquery.magnific-popup.min.js"></script>
+    <script src="../assets/others/js/mixitup.min.js"></script>
+    <script src="../assets/others/js/jquery-ui.min.js"></script>
+    <script src="../assets/others/js/jquery.slicknav.js"></script>
+    <script src="../assets/others/js/owl.carousel.min.js"></script>
+    <script src="../assets/others/js/jquery.richtext.min.js"></script>
+    <script src="../assets/others/js/image-uploader.min.js"></script>
+    <script src="../assets/others/js/main.js"></script>
+    <script src="../assets/others/js/jquery.nice-select.min.js"></script>
+    <script src="../assets/js/core/popper.min.js"></script>
+    <script src="../assets/js/core/bootstrap.min.js"></script>
+    <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
+    <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
+
+    <script src="../assets/js/vendor/modernizr-3.5.0.min.js"></script>
+    <!-- Jquery, Popper, Bootstrap -->
+    <script src="../assets/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="../assets/js/popper.min.js"></script>
+    <script src="../assets/js/bootstrap.min.js"></script>
+    <!-- Jquery Mobile Menu -->
+    <script src="../assets/js/jquery.slicknav.min.js"></script>
+
+    <!-- Jquery Slick , Owl-Carousel Plugins -->
+    <script src="../assets/js/owl.carousel.min.js"></script>
+    <script src="../assets/js/slick.min.js"></script>
+
+    <!-- One Page, Animated-HeadLin -->
+    <script src="../assets/js/wow.min.js"></script>
+    <script src="../assets/js/animated.headline.js"></script>
+    <script src="../assets/js/jquery.magnific-popup.js"></script>
+
+    <!-- Scrollup, nice-select, sticky -->
+    <script src="../assets/js/jquery.scrollUp.min.js"></script>
+    <script src="../assets/js/jquery.nice-select.min.js"></script>
+    <script src="../assets/js/jquery.sticky.js"></script>
+
+    <!-- contact js -->
+    <script src="../assets/js/contact.js"></script>
+    <script src="../assets/js/jquery.form.js"></script>
+    <script src="../assets/js/jquery.validate.min.js"></script>
+    <script src="../assets/js/mail-script.js"></script>
+    <script src="../assets/js/jquery.ajaxchimp.min.js"></script>
+
+    <!-- Jquery Plugins, main Jquery -->
+    <script src="../assets/js/plugins.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <!----Strip---->
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.0/main.min.js" integrity="sha256-DBxkGZLxKsLKhz054qUpBqtotG00r9AELGpSigJujLg=" crossorigin="anonymous"></script>
+
+{% endblock %}
+</body>
+</html>

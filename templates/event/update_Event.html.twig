@@ -1,0 +1,79 @@
+{% extends '/FrontOffice/base.html.twig' %}
+{% block body %}
+    <main id="main">
+
+        <!-- Hero Area Start-->
+        <div class="slider-area ">
+            <div class="single-slider slider-height2 d-flex align-items-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="hero-cap text-center">
+                                <h2>About Us</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- ======= Event Section ======= -->
+        <div class="about-details section-padding30">
+            <div class="container">
+                {{form_start(form,{'attr':{'class':'wpcf7-form','novalidate':'novalidate'}})}}
+
+                <div class="form-group">
+                    <label class="form-label" for="exampleInputname">title</label>
+                    {{ form_widget(form.title , {'attr': {'class': 'form-control form-control-user' , 'placeholder' : 'title'}} ) }}
+                    {{ form_errors(form.title) }}
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="exampleInputname">description</label>
+                    {{ form_widget(form.description , {'attr': {'class': 'form-control form-control-user' , 'placeholder' : 'description'}} ) }}
+                    {{ form_errors(form.description) }}
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="exampleInputname">location</label>
+                    {{ form_widget(form.location , {'attr': {'class': 'form-control form-control-user' , 'placeholder' : 'location'}} ) }}
+                    {{ form_errors(form.location) }}
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="exampleInputname">price</label>
+                    {{ form_widget(form.price , {'attr': {'class': 'form-control form-control-user' , 'placeholder' : 'price'}} ) }}
+                    {{ form_errors(form.price) }}
+                </div>
+
+                <label class="form-label" for="exampleInputname">type</label>
+                {{ form_widget(form.type , {'attr': {'placeholder' : 'type'}} ) }}
+                {{ form_errors(form.type) }}
+
+
+
+                <label class="form-label ">startDate</label>
+                {{ form_row(form.startDate  ) }}
+                {{ form_errors(form.startDate) }}
+
+                <div class="form-group">
+                    <label class="form-label ">endDate</label>
+                    {{ form_row(form.endDate ) }}
+                    {{ form_errors(form.endDate) }}
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label ">Cat</label>
+                    {{ form_widget(form.Cat ) }}
+                    {{ form_errors(form.Cat) }}
+                </div>
+
+
+
+                {{ form_end(form) }}
+            </div>
+        </div>
+
+    </main><!-- End #main -->
+{% endblock %}

@@ -1,0 +1,159 @@
+{% extends '/FrontOffice/base.html.twig' %}
+
+{% block body %}
+    <!-- Start Main -->
+    <main>
+       <style>
+                                #hr {
+                                    width: 100%;
+                                    height: 76vh;
+                                    background: url("/assets/img/recipe/addr.jpg") center center;
+                                    background-size: cover;
+                                    position: relative;
+                                }
+                                #hr .container {
+                                    padding-top: 80px;
+                                }
+
+                                #hr:before {
+                                    content: "";
+                                    background: rgba(0, 0, 0, 0.6);
+                                    position: absolute;
+                                    bottom: 0;
+                                    top: 0;
+                                    left: 0;
+                                    right: 0;
+                                }
+
+                                #hr h1 {
+                                    margin: 0 0 10px 0;
+                                    font-size: 48px;
+                                    font-weight: 700;
+                                    line-height: 56px;
+                                    color: #fff;
+                                }
+
+                                #hr h2 {
+                                    color: #eee;
+                                    margin-bottom: 40px;
+                                    font-size: 15px;
+                                    font-weight: 500;
+                                    font-family: "Open Sans", sans-serif;
+                                    letter-spacing: 0.5px;
+                                    text-transform: uppercase;
+                                }
+
+                                #hr .btn-get-started {
+                                    font-family: "Poppins", sans-serif;
+                                    text-transform: uppercase;
+                                    font-weight: 500;
+                                    font-size: 14px;
+                                    letter-spacing: 1px;
+                                    display: inline-block;
+                                    padding: 12px 28px;
+                                    transition: 0.5s;
+                                    margin: 10px;
+                                    border: 2px solid #fff;
+                                    color: #fff;
+                                }
+
+                                #hr .btn-get-started:hover {
+                                    background: #0b517d;
+                                    border: 2px solid #0b517d;
+                                }
+
+                                @media (min-width: 1024px) {
+                                    #hr {
+                                        background-attachment: fixed;
+                                    }
+                                }
+
+                                @media (max-width: 768px) {
+                                    #hr {
+                                        height: 100vh;
+                                    }
+                                    #hr .container {
+                                        padding-top: 60px;
+                                    }
+                                    #hr h1 {
+                                        font-size: 200px;
+                                        line-height: 36px;
+                                    }
+                                }
+                            </style>
+
+                            <section id="hr" class="d-flex align-items-center">
+                                <div class="container text-center position-relative" data-aos="fade-in" data-aos-delay="200">
+                                    <font color="#fff" size="130">Add new recipe</font><br>
+                                </div>
+                            </section>
+
+        <!--================Checkout Area =================-->
+
+        <style>
+            .box {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: inherit;
+                padding: 40px;
+            }
+            form {
+                width: 150%;
+                padding: 20px;
+                border-radius: 6px;
+                /*background: #fff;*/
+                box-shadow: 0 0 20px 0 #095484;
+                background-image: url("/assets/img/recipe/m3.jpg");
+                background-size: cover;
+            }
+        </style>
+
+        <section class="checkout_area section_padding">
+            <div class="container">
+                <div class="billing_details">
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <h3>Recipe Details :</h3>
+                            <div class="box">
+                                {{ form_start(form,{ 'attr':{'novalidate':'novalidate'}}) }}
+
+                                <div class="col-md-6 form-group p_star">
+                                    {{ form_row(form.Title, { 'attr': {'class': 'form-control'} }) }}
+                                </div>
+                                <div class="col-md-6 form-group p_star">
+                                    {{ form_row(form.Description ,{ 'attr': {'class': 'form-control'} }) }}
+                                </div>
+                                <div class="col-md-12 form-group p_star">
+                                    {{ form_row(form.Cat,{ 'attr': {'class': 'country_select'} }) }}
+                                </div>
+                                <div class="col-md-12 form-group">
+                                    {{ form_row(form.Ingredients,{ 'attr': {'class': 'form-control'} }) }}
+                                </div>
+                                <div class="col-md-12 form-group">
+                                    {{ form_row(form.Steps,{ 'attr': {'class': 'form-control'} }) }}
+                                </div>
+                                <div class="col-md-12 form-group">
+                                    {{ form_row(form.Calories,{ 'attr': {'class': 'form-control'} }) }}
+                                </div>
+                                <div class="col-md-12 form-group">
+                                    {{ form_row(form.Duration,{ 'attr': {'class': 'form-control'} }) }}
+                                </div>
+                                <div class="col-md-12 form-group">
+                                    {{ form_row(form.Persons,{ 'attr': {'class': 'form-control'} }) }}
+                                </div>
+                                <div class="col-md-12 form-group p_star">
+                                    {{ form_row(form.ImgUrl,{ 'attr': {'class': 'form-control'} }) }}
+                                </div>
+                                <div style="text-align: center;">{{ form_row(form.add,{ 'attr': {'class': 'btn_3'} }) }}</div>
+                                {{ form_end(form) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--================End Checkout Area =================-->
+    </main>
+    <!-- End Main -->
+{% endblock %}

@@ -1,0 +1,79 @@
+{% extends '/FrontOffice/base.html.twig' %}
+
+{% block body %}
+    <!-- Start Main -->
+    <main>
+        <!-- Hero Area Start-->
+        <div class="slider-area ">
+            <div class="single-slider slider-height2 d-flex align-items-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="hero-cap text-center">
+                                <h2>book details</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--================Blog Area =================-->
+        <section class="blog_area single-post-area section-padding">
+            {%  for b in book %}
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 posts-list">
+                        <div class="single-post">
+                            <div class="feature-img">
+
+                                <img class="img-fluid" src="{{ asset("../assets/img/book/"~ b.imgUrl)}}" alt="">
+                            </div>
+                            <div class="blog_details">
+                                <h2>{{b.title}}
+                                </h2>
+                                <ul class="blog-info-link mt-3 mb-4">
+                                    <li><a href="#"><i class="fa fa-user"></i> {{b.author}}</a></li>
+                                    <li><a href="#"><i class="fas fa-eye"></i> {{b.views}}</a></li>
+                                </ul>
+
+
+                                <div class="quote-wrapper">
+                                    <div class="quotes">
+                                       description: {{b.description}}
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="blog_right_sidebar">
+
+                            <aside class="single_sidebar_widget post_category_widget">
+                                <h4 class="widget_title">Analise</h4>
+                                {% set QR %}
+                                    book title:{{b.title}}
+                                    author:{{b.author}}
+                                    description:{{b.description}}
+
+                                {% endset %}
+                                <div ><img src="{{ qr_code_data_uri(QR) }}"></div>
+
+                            </aside>
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </section>
+        <!--================ Blog Area end =================-->
+    </main>
+    <!-- End Main -->
+{% endblock %}

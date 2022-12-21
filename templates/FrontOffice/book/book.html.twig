@@ -1,0 +1,153 @@
+{% extends '/FrontOffice/base.html.twig' %}
+
+{% block body %}
+    <!-- Hero Area Start-->
+    <div class="slider-area ">
+        <div class="single-slider slider-height2 d-flex align-items-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="hero-cap text-center">
+                            <h2>All books</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Hero Area End-->
+    <section class="property-section latest-property-section spad">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-5">
+                    <div class="section-title">
+                        <div class="input-group mb-3">
+                            <h4>Latest books</h4>
+                            <input type="text" class="form-control" id="search" placeholder='Search Keyword'
+                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search Keyword'">
+                            <div class="input-group-append">
+                                <button class="btns" type="button"><i class="ti-search"></i></button>
+                            </div>
+
+
+                        </div>
+                        {% if is_granted("ROLE_Therapist") %}
+                        <a href="{{ path('Ajoute') }}" title="add" style="color: #0b0b0b" > <i class="fas fa-plus fa-3x" ></i></a>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="property-controls">
+
+                        <ul>
+                            <li><a href="{{ path('book') }}" style="color: #0b0b0b">all books</a></li>
+                            {% for c in cats %}
+                                <li><a  href="{{ path('bookfilter',{'catId':c.catId}) }}" style="color: #0b0b0b">{{ c.name }}</a></li>
+
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row property-filter" >
+
+                {% set classType="col-lg-4 col-md-6 mix all event" %}
+                {% set img='assets/img/portfolio/portfolio-3.jpg' %}
+                {% for b in books %}
+
+                    <div id="all" class="{{ classType }}">
+                        <div class="property-item">
+
+                            <div class="pi-pic set-bg" data-setbg="{{ asset("../assets/img/book/"~ b.imgUrl)}}">
+
+
+
+                                <div class="favorit-items">
+                                    <span >
+                                        {% if is_granted("ROLE_Therapist") %}
+                                            <a href="{{ path('d',{'bookId':b.bookId}) }}"  title="delete"> <i class="fas fa-trash-alt"></i></a>
+                                            <a href="{{ path('u',{'bookId':b.bookId}) }}"   title="update"><i class="fas fa-wrench"></i></a>
+                                        {% endif %}
+                                    </span>
+                                </div>
+
+                            </div>
+                            <div class="pi-text">
+                                <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
+
+                                <h5><a href="{{ path('bookdetails',{'bookId':b.bookId}) }}" >{{ b.title }} </a></h5>
+
+                                <ul>
+                                    <li><i class="fas fa-eye"></i> {{ b.views}}</li>
+
+
+                                </ul>
+                                <div class="pi-agent">
+                                    <div class="pa-item">
+                                        <div class="pa-info">
+                                            <img src="../assets/others/img/property/posted-by/pb-1.jpg" alt="">
+                                            <h6> {{ b.author }}</h6>
+                                        </div>
+                                        <div class="pa-text">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                <div id="search" class="{{ classType }}"></div>
+                <div id="pg" class="pagination justify-content-center ">
+                    {{ knp_pagination_render(books) }}
+                </div>
+            </div>
+
+
+        </div>
+    </section><!-- End Portfolio Section -->
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+    </script>
+    <script>
+        $( document ).ready(function() {
+            $("#search").keyup(function(e){
+                /* La variable value va prendre la valeur insérer dans le champ de texte afin d’effectuer la recherche */
+                var value = $(this).val();
+                /* Ajax est lancé lors du remplissage du champ texte dont l’id est « search » pour faire la recherche */
+                $.ajax({
+                    /* l’url est une chaine de caractères contenant l’adresse où la requête est envoyée */
+                    url : "{{ path('SearchBook') }}",
+                    /* La méthode utilisée pour transférer les données est GET */
+                    type : 'GET',
+                    /*Ici search value va prendre la chaine entrée par un utilisateur dans la zone de recherche et sera placée après l’url */
+                    data: {
+                        'searchValue' : value
+                    },
+                    /*Cette fonction permet de vider le contenu du tableau pour recevoir le nouveau contenu*/
+                    success : function(retour){
+                        if(retour){
+                            $('div#search').empty();
+                            $.each(JSON.parse(retour), function(i, obj) {
+                                $('div#all').hide();
+                                $('div#search').append('<div id="all" class=""> <div class="property-item"><div class="pi-pic set-bg"  data-setbg="../assets/img/book/'+obj.imgUrl+'"> <div div class="favorit-items"> <span ><a href="/supp/'+obj.bookId+'" title="delete" > <i class="fas fa-trash-alt" ></i></a> <a  href="/supp/'+obj.bookId+'"   title="update" > <i class="fas fa-wrench" ></i></a> </span ></div></div> <div class="pi-text" > <a href="#" class="heart-icon" ><span class="icon_heart_alt" ></span></a>  <h5><a href="/bookdetails/'+obj.bookId+'"  >'+obj.title+'</a></h5> <ul>  <li><i class="fas fa-eye" ></i> '+obj.views+' </li></ul><div class="pi-agent" > <div class="pa-item" > <div class="pa-info" > <img src="../assets/others/img/property/posted-by/pb-1.jpg" alt="" >  <h6> '+obj.author+'</h6> <div class="pa-text">  </div> </div></div></div> </div> </div> </div>');
+                            });
+                        }
+                        else
+                        {
+                            $('div#all').show();
+                            $('div#search').empty();
+                            $('div#search').fadeIn('fast');
+                        }
+                    },
+                });
+                return false;
+            });
+        });
+
+    </script>
+{% endblock %}

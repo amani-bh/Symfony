@@ -1,0 +1,76 @@
+{% extends '/FrontOffice/base.html.twig' %}
+
+{% block body %}
+    <!-- Start Main -->
+    <main>
+        <!-- Hero Area Start-->
+        <div class="slider-area ">
+            <div class="single-slider slider-height2 d-flex align-items-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="hero-cap text-center">
+                                <h2>update book</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--================Blog Area =================-->
+        <section class="blog_area single-post-area section-padding">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 posts-list">
+                        <div class="single-post">
+                            <div class="comment-form">
+                                <h4>update book</h4>
+
+                                {{form_start(form,{'attr':{'class':'form-contact comment_form'}})}}
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            {{ form_widget(form.author, {'attr': {'class': 'form-control'}}) }}
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+                                        </div>
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <button type="submit" class="button button-contactForm btn_1 boxed-btn">update </button>
+                                    </div>
+
+                                </div>
+
+
+                                {{ form_end(form) }}
+
+
+
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+        <!--================ Blog Area end =================-->
+    </main>
+    <!-- End Main -->
+{% endblock %}

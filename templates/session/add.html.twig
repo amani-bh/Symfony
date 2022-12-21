@@ -1,0 +1,61 @@
+{% extends '/FrontOffice/base.html.twig' %}
+
+{% block body %}
+    <!-- Start Main -->
+    <main>
+        <!-- Hero Area Start-->
+        <div class="slider-area ">
+            <div class="single-slider slider-height2 d-flex align-items-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="hero-cap text-center">
+                                <h2>add new session</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--================Checkout Area =================-->
+
+                            <section id="team" class="team">
+                                <div class="container">
+                                    {{ form_start(form,{ 'attr':{'novalidate':'novalidate'}}) }}
+                                    <table>
+                                        <tr><td> {{ form_row(form.Title, { 'attr': {'class': 'form-control','id':'title'} }) }}</td>{{ form_errors(form.Title) }}<br></tr>
+                                        <tr><td> {{ form_row(form.Description ,{ 'attr': {'class': 'form-control'} }) }}</td>{{ form_errors(form.Description) }}</tr>
+                                        <tr> <td> {{ form_row(form.numOfDays,{ 'attr': {'class': 'form-control'} }) }}</td>{{ form_errors(form.numOfDays) }}</tr>
+
+                                        <tr> <td> <br>{{ form_row(form.add,{ 'attr': {'class': 'btn btn-primary','id':'add'} }) }}</td></tr>
+                                    </table>
+
+                                    {{ form_end(form) }}
+                                </div>
+                            </section><!-- End Tasks Section -->
+
+
+        <!--================End Checkout Area =================-->
+    </main>
+    <!-- End Main -->
+    <script>
+        function editbadword()
+        {
+            var textarea =document.getElementById('form_Title').value;
+            var badwords=['test','haitham'];
+            console.log(textarea);
+
+            if (badwords.includes(textarea))
+            {
+                document.getElementById('form_Title').value="####";
+            }
+
+            console.log(textarea);
+
+        }
+        console.log(document.getElementById('form_Title'));
+        console.log(document.getElementById('form_add'));
+        document.getElementById('form_Title').addEventListener('change',editbadword);
+    </script>
+
+{% endblock %}

@@ -1,0 +1,79 @@
+{% extends '/FrontOffice/base.html.twig' %}
+
+{% block body %}
+    <!-- Start Main -->
+    <main>
+        <!-- Hero Area Start-->
+        <div class="slider-area ">
+            <div class="single-slider slider-height2 d-flex align-items-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="hero-cap text-center">
+                                <h2>Blog details</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--================Blog Area =================-->
+        <section class="blog_area single-post-area section-padding">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 posts-list">
+                        <div class="single-post">
+                            </h2>
+                            <h2>{{ event.title }}
+                            </h2>
+                            <div class="feature-img">
+                                <img class="img-fluid" src="{{ asset('assets/img/event/'~event.imgUrl) }}" width=" 690px" height="100px" alt="">
+                            </div>
+                            <div class="blog_details">
+                                <h2>{{ event.price}} DT
+
+                                    <ul class="blog-info-link mt-3 mb-4">
+                                        <p class="excert">
+                                            {{ event.description }}
+                                        </p>
+                                        <p class="excert">
+                                            {{ event.location }}
+                                        </p>
+                                        <li><a href="#"><i class="fa fa-user"></i> {{ event.startDate|date('Y-m-d') }}</a></li>
+                                        <li><a href="#"><i class="fa fa-comments"></i>{{ event.endDate|date('Y-m-d') }} </a></li>
+                                    </ul>
+                                    <div class="navigation-top">
+                                    </div>
+
+                                    <div class="navigation-top">
+                                    </div>
+
+
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="blog_right_sidebar">
+                            <aside class="single_sidebar_widget search_widget">
+
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+
+                                    </div>
+                                </div>
+                                <a class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
+                                   type="submit">Participate</a>
+                                <a class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn" href="{{ path('update_event' ,{'id':event.eventId})}}">update</a>
+                                <a class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn" href="{{ path('delete_event' ,{'id':event.eventId})}}">delete</a>                            </aside>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--================ Blog Area end =================-->
+    </main>
+    <!-- End Main -->
+{% endblock %}

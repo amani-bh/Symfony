@@ -1,0 +1,34 @@
+{% extends '/FrontOffice/base.html.twig' %}
+
+{% block body %}
+    <div id="calendrier">
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        window.onload = () => {
+            let calendarElt = document.querySelector("#calendrier")
+
+            let calendar = new FullCalendar.Calendar(calendarElt, {
+                initialView: 'dayGridMonth',
+                locale: 'fr',
+                timeZone: 'Europe/Paris',
+                headerToolbar: {
+                    start: 'prev,next today',
+                    center: 'title',
+                    end: 'dayGridMonth,timeGridWeek'
+                },
+                events: {{ data|raw }},
+                editable: true,
+                eventResizableFromStart: true
+            })
+
+
+            calendar.render();
+        }
+    </script>
+
+{% endblock %}

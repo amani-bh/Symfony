@@ -1,0 +1,198 @@
+{% extends '/FrontOffice/base.html.twig' %}
+
+{% block body %}
+
+    <!-- Property Details Section Begin -->
+    <section class="property-details-section">
+        <div class="container">
+            </br></br></br>
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="pd-text">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="pd-title">
+
+
+                                    <input type="hidden" id="id" >
+                                    <input type="hidden" id="type" >
+                                    {% set p=0 %}
+                                    {% if task.type=="paid" %}
+                                        <div class="pt-price">{{ paid.price }} <span>/Dt</span></div>
+                                        {% set p= paid.price  %}
+                                    {% else %}
+                                        {% set p= 0  %}
+                                    {% endif %}
+                                    <h3>{{ task.title }}</h3>
+                                    <p> {{ task.numOfDays }} Days</p>
+
+                                </div>
+
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="pd-social">
+                                    {% if is_granted('ROLE_Therapist') %}
+                                        {% if user==task.u %}
+                                            <a  href="{{ path('update_task' ,{'id':task.id})}}"><i class="fa fa-edit "></i></a>
+                                            <a href="{{ path('delete_task' ,{'id':task.id})}}"><i class="fa fa-trash"></i></a>
+                                        {% endif %}
+                                    {% endif %}
+                                    <a href=""><i class="fa fa-star"></i></a>
+                                    <a href=""><i class="fa fa-flag"></i></a>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="pd-widget">
+                            <img class="" src="{{ asset('assets/img/task/'~task.imgUrl) }}" width=" 600px" height="300px" alt="">
+                            <br>
+                            <br>
+                            <h3>Description</h3>
+                            <br>
+                            <h5>{{ task.description }}</h5>
+                            <br><br>
+                            {% if is_granted('ROLE_USER') %}
+                                {% if task.u != user%}
+                                    {% if part=="" %}
+                                        <button class="button rounded-0 primary-bg text-white w-25 btn_1 boxed-btn" id="checkout-button">Participate</button>
+                                    {% endif %}
+                                {% endif %}
+                            {% endif %}
+                            {#   <a style="margin-left: 30em" class="button rounded-0 primary-bg text-white w-25 btn_1 boxed-btn" href="{{ path('participate_task' ,{'id':task.id})}}">Participate</a>
+                            #} <br><br>
+                            {% if is_granted('ROLE_USER') %}
+                                {% if part=="exist" %}
+                                    <a style="margin-left: 30em" class="button rounded-0 primary-bg text-white w-30 btn_1 boxed-btn" href="{{ path('task_actions_by_task' ,{'id':task.id})}}">See actions</a>
+                                {% endif %}
+                            {% endif %}
+                            {% if is_granted('ROLE_Therapist') %}
+                                {% if task.u==user %}
+                                    <a style="margin-left: 30em" class="button rounded-0 primary-bg text-white w-30 btn_1 boxed-btn" href="{{ path('task_actions_by_task' ,{'id':task.id})}}">See actions</a>
+                                {% endif %}
+                            {% endif %}
+                            <br><br>
+                            <h4>Therapist</h4>
+                            <div class="pd-agent">
+                                <div class="agent-pic">
+                                    <img src="../assets/others/img/property/details/agent.jpg" alt="">
+                                </div>
+                                <div class="agent-text">
+                                    <div class="at-title">
+                                        <h6>{{ task.u.firstName }} {{ task.u.lastName }}</h6>
+
+
+                                    </div>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipis cing elit, eiusmod tempor incididunt</p>
+                                    <div class="at-option">
+                                        <div class="at-number">{{ task.u.email }}</div>
+                                        <div class="at-social">
+                                            <a href="#"><i class="fa fa-facebook"></i></a>
+                                            <a href="#"><i class="fa fa-twitter"></i></a>
+                                            <a href="#"><i class="fa fa-envelope-o"></i></a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="property-sidebar">
+                        <div class="single-sidebar">
+                            <div class="section-title sidebar-title">
+                                <h5>Last Tasks</h5>
+                            </div>
+
+                            <div class="top-agent">
+                                {% for lastTask in lastTasks %}
+                                    <div class="ta-item">
+                                        <div class="ta-pic set-bg" data-setbg="{{ asset('assets/img/task/'~lastTask.imgUrl) }}"></div>
+                                        <div class="ta-text">
+                                            <h6><a href="#">{{ lastTask.title }} </a></h6>
+                                            <span style="color: white">{{ lastTask.id }} </span>
+                                            <div class="ta-num">{{ lastTask.createdAt }}</div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+
+                        </div>
+                        <div class="single-sidebar slider-op">
+                            <div class="section-title sidebar-title">
+                                <h5>Categories</h5>
+                            </div>
+                            <div class="sf-slider owl-carousel">
+                                {% for category in categories %}
+                                    <div class="sf-item set-bg" data-setbg="{{ asset('assets/img/task/'~category.imgUrl) }}">
+                                        <div class="sf-text">
+                                            <a href="{{ path('tasks_by_category',{'id':category.catId}) }}">  <h5>{{ category.name }}</h5></a>
+                                            <span>{{ category.totalTasks }} Tasks</span>
+                                        </div>
+                                    </div>
+
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        </div>
+
+    </section>
+    <!-- Property Details Section End -->
+
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+
+    <script type="text/javascript">
+        var stripe = Stripe('pk_test_51IjkvCBmeiBzIRGD5pNDXKeyGS6JRLAIeNbZCTy7KnPZj2Uva5SajH5IAtfUZLcSKIFS0N7sLbAlVn5LtzekZKJQ00eRFhCHvT');
+
+        var checkoutButton = document.getElementById('checkout-button');
+        console.log(checkoutButton);
+        var price="{{ paid.price }}";
+        console.log(price);
+
+        checkoutButton.addEventListener('click', function() {
+
+            if( price!="")
+            {
+                fetch('/create-checkout-session/{{ paid.price }}00/{{ task.title }}/{{ task.id }}', {
+                    method: 'POST',
+                })
+                    .then(function(response) {
+                        return response.json();
+                    })
+                    .then(function(session) {
+                        return stripe.redirectToCheckout({ sessionId: session.id });
+                    })
+                    .then(function(result) {
+
+                        if (result.error) {
+                            alert(result.error.message);
+                        }
+                    })
+                    .catch(function(error) {
+                        console.error('Error:', error);
+                    });
+                console.log("before {{task.id  }}");
+            }else{
+                console.log("{{task.id  }}");
+                fetch('/participateTask/{{ task.id }}', {
+                    method: 'POST',
+                })
+
+            }
+
+        });
+
+
+    </script>
+{% endblock %}

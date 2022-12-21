@@ -1,0 +1,50 @@
+<table>
+    <h4>la liste des events</h4>
+   
+    <hr>
+    <thead>
+    	DESCRIPTION	START DATE	END DATE	PRICE	TYPE	LOCATION
+    <tr> 
+        <th>Title</th>
+        <th>DESCRIPTION</th>
+        <th>	START DATE</th>
+        <th>END DATE</th>
+        <th>PRICE</th>
+        <th>TYPE</th>
+        <th>LOCATION</th>
+      
+    </tr>
+    </thead>
+    <tbody>
+     {% for event in events %}
+        <tr>
+          
+
+            <td>
+                {{ event.title }}
+            </td>
+
+            <td>
+                {{ event.description }}
+            </td>
+            <td>
+                {{event.startDate|date('Y-m-d') }}
+            </td>
+            <td>
+                {{event.endDate|date('Y-m-d') }}
+            </td>
+            <td>
+                {{event.price }}
+            </td>
+            <td>
+                {{event.type }}
+            </td>
+            <td>
+                {{ event.location }}
+            </td>
+           
+           
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

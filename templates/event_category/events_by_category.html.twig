@@ -1,0 +1,58 @@
+{% extends '/FrontOffice/base.html.twig' %}
+{% block body %}
+    <main id="main">
+
+        <!-- ======= Breadcrumbs ======= -->
+        <section id="breadcrumbs" class="breadcrumbs">
+            <div class="container">
+
+                <div class="d-flex justify-content-between align-items-center">
+                    <h2>Event Categories</h2>
+                    <ol>
+                        <li><a href="{{ path('Event_category_list' )}}">Categories</a></li>
+                        <li>category</li>
+                    </ol>
+                </div>
+
+            </div>
+        </section><!-- End Breadcrumbs -->
+
+
+        <!-- ======= Tasks Section ======= -->
+        <section id="team" class="team">
+            <div class="container">
+                <div class="d-flex justify-content-between align-items-center">
+                    <a href="{{ path('add_event')}}">Create new Event</a>
+                </div>
+                <div class="col-lg-8">
+                    <div class="row">
+                        {% for event in events %}
+                            <div class="col-lg-6 mt-4">
+                                <div class="member" data-aos="zoom-in" data-aos-delay="100">
+                                    <img height="300px" src="{{ asset('assets/img/event/' ~ event.imgUrl ) }}" class="avatar avatar-sm me-3">
+                                    <div class="member-info">
+                                        <h4>{{ event.title }}</h4>
+                                        {% set difference = date(event.endDate).diff(date(event.startDate)) %}
+                                        {% set leftDays = difference.days %}
+                                        <p>{{ leftDays }} Days left</p>
+                                        <span>therapist name</span>
+                                        <p>Free</p>
+                                        <div >
+                                            <a href="{{ path('event_details' ,{'idt':event.eventId})}}">Show details</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+
+
+                </div>
+            </div>
+
+            </div>
+        </section><!-- End Tasks Section -->
+
+
+    </main><!-- End #main -->
+{% endblock %}

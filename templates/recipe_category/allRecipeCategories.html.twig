@@ -1,0 +1,332 @@
+{% extends '/FrontOffice/base.html.twig' %}
+
+{% block body %}
+ <style>
+         #hr {
+             width: 100%;
+             height: 76vh;
+             background: url("/assets/img/recipe/rb.jpg") center center;
+             background-size: cover;
+             position: relative;
+         }
+         #hr .container {
+             padding-top: 80px;
+         }
+
+         #hr:before {
+             content: "";
+             background: rgba(0, 0, 0, 0.6);
+             position: absolute;
+             bottom: 0;
+             top: 0;
+             left: 0;
+             right: 0;
+         }
+
+         #hr h1 {
+             margin: 0 0 10px 0;
+             font-size: 48px;
+             font-weight: 700;
+             line-height: 56px;
+             color: #fff;
+         }
+
+         #hr h2 {
+             color: #eee;
+             margin-bottom: 40px;
+             font-size: 15px;
+             font-weight: 500;
+             font-family: "Open Sans", sans-serif;
+             letter-spacing: 0.5px;
+             text-transform: uppercase;
+         }
+
+         #hr .btn-get-started {
+             font-family: "Poppins", sans-serif;
+             text-transform: uppercase;
+             font-weight: 500;
+             font-size: 14px;
+             letter-spacing: 1px;
+             display: inline-block;
+             padding: 12px 28px;
+             transition: 0.5s;
+             margin: 10px;
+             border: 2px solid #fff;
+             color: #fff;
+         }
+
+         #hr .btn-get-started:hover {
+             background: #0b517d;
+             border: 2px solid #0b517d;
+         }
+
+         @media (min-width: 1024px) {
+             #hr {
+                 background-attachment: fixed;
+             }
+         }
+
+         @media (max-width: 768px) {
+             #hr {
+                 height: 100vh;
+             }
+             #hr .container {
+                 padding-top: 60px;
+             }
+             #hr h1 {
+                 font-size: 200px;
+                 line-height: 36px;
+             }
+         }
+     </style>
+
+     <section id="hr" class="d-flex align-items-center">
+         <div class="container text-center position-relative" data-aos="fade-in" data-aos-delay="200">
+             <font color="#fff" size="130">Recipe Categories</font><br>
+         </div>
+     </section>
+
+<style>
+ .portfolio .portfolio-item {
+             margin-bottom: 30px;
+         }
+
+         .portfolio #portfolio-flters {
+             padding: 0;
+             margin: 0 auto 20px auto;
+             list-style: none;
+             text-align: center;
+         }
+
+         .portfolio #portfolio-flters li {
+             cursor: pointer;
+             display: inline-block;
+             padding: 8px 16px 8px 16px;
+             font-size: 14px;
+             font-weight: 500;
+             line-height: 1;
+             text-transform: uppercase;
+             color: #444444;
+             margin-bottom: 5px;
+             transition: all 0.3s ease-in-out;
+             border-radius: 50px;
+             font-family: "Poppins", sans-serif;
+         }
+
+         .portfolio #portfolio-flters li:hover, .portfolio #portfolio-flters li.filter-active {
+             color: #fff;
+             background: #009970;
+         }
+
+         .portfolio #portfolio-flters li:last-child {
+             margin-right: 0;
+         }
+
+         .portfolio .portfolio-wrap {
+             transition: 0.3s;
+             position: relative;
+             overflow: hidden;
+             z-index: 1;
+             background: white;
+         }
+
+         .portfolio .portfolio-wrap::before {
+             content: "";
+             background: rgba(54, 52, 58, 0.6);
+             position: absolute;
+             left: 0;
+             right: 0;
+             top: 0;
+             bottom: 0;
+             transition: all ease-in-out 0.3s;
+             z-index: 2;
+             opacity: 0;
+         }
+
+         .portfolio .portfolio-wrap img {
+             max-width: 95%;
+             overflow: hidden;
+             border: 10px solid #eaf0ff;
+             border-radius: 50%;
+         }
+
+         .portfolio .portfolio-wrap .portfolio-info {
+             opacity: 0;
+             position: absolute;
+             top: 0;
+             left: 0;
+             right: 0;
+             bottom: 0;
+             z-index: 3;
+             transition: all ease-in-out 0.3s;
+             display: flex;
+             flex-direction: column;
+             justify-content: flex-end;
+             align-items: center;
+             padding: 20px;
+         }
+
+         .portfolio .portfolio-wrap .portfolio-info h4 {
+             font-size: 40px;
+             color: #fff;
+             font-weight: 600;
+         }
+
+         .portfolio .portfolio-wrap .portfolio-info p {
+             color: rgba(255, 255, 255, 0.7);
+             font-size: 14px;
+             text-transform: uppercase;
+             padding: 0;
+             margin: 0;
+             font-style: italic;
+         }
+
+         .portfolio .portfolio-wrap .portfolio-links {
+             text-align: center;
+             z-index: 4;
+         }
+
+         .portfolio .portfolio-wrap .portfolio-links a {
+             color: #fff;
+             margin: 0 5px 0 0;
+             font-size: 28px;
+             display: inline-block;
+             transition: 0.3s;
+         }
+
+         .portfolio .portfolio-wrap .portfolio-links a:hover {
+             color: #00cc95;
+         }
+
+         .portfolio .portfolio-wrap:hover::before {
+             opacity: 1;
+             border-radius: 50%;
+         }
+
+         .portfolio .portfolio-wrap:hover img {
+             transform: scale(1.2);
+             border-radius: 50%;
+         }
+
+         .portfolio .portfolio-wrap:hover .portfolio-info {
+             opacity: 1;
+             border-radius: 50%;
+         }
+
+         .portfolio-details {
+             padding-top: 40px;
+         }
+
+         .portfolio-details .portfolio-details-container {
+             position: relative;
+         }
+
+         .portfolio-details .portfolio-details-carousel {
+             position: relative;
+             z-index: 1;
+         }
+
+         .portfolio-details .portfolio-details-carousel .owl-nav, .portfolio-details .portfolio-details-carousel .owl-dots {
+             margin-top: 5px;
+             text-align: left;
+         }
+
+         .portfolio-details .portfolio-details-carousel .owl-dot {
+             display: inline-block;
+             margin: 0 10px 0 0;
+             width: 12px;
+             height: 12px;
+             border-radius: 50%;
+             background-color: #ddd !important;
+         }
+
+         .portfolio-details .portfolio-details-carousel .owl-dot.active {
+             background-color: #009970 !important;
+         }
+
+         .portfolio-details .portfolio-info {
+             padding: 30px;
+             position: absolute;
+             right: 0;
+             bottom: -70px;
+             background: #fff;
+             box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+             z-index: 2;
+         }
+
+         .portfolio-details .portfolio-info h3 {
+             font-size: 22px;
+             font-weight: 700;
+             margin-bottom: 20px;
+             padding-bottom: 20px;
+             border-bottom: 1px solid #eee;
+         }
+
+         .portfolio-details .portfolio-info ul {
+             list-style: none;
+             padding: 0;
+             font-size: 15px;
+         }
+
+         .portfolio-details .portfolio-info ul li + li {
+             margin-top: 10px;
+         }
+
+         .portfolio-details .portfolio-description {
+             padding-top: 50px;
+         }
+
+         .portfolio-details .portfolio-description h2 {
+             width: 50%;
+             font-size: 26px;
+             font-weight: 700;
+             margin-bottom: 20px;
+         }
+
+         .portfolio-details .portfolio-description p {
+             padding: 0 0 0 0;
+         }
+
+         @media (max-width: 768px) {
+             .portfolio-details .portfolio-info {
+                 position: static;
+                 margin-top: 30px;
+             }
+         }
+</style>
+<br><br>
+<div class="row justify-content-center mb-5 pb-2">
+				<div class="col-md-7 text-center heading-section ftco-animate">
+					<span class="subheading">Specialties</span>
+				    <h2 class="mb-4">Only the healthy for you </h2>
+				    <a href="{{ path('allRecipes') }}" class="btn_3">View All Recipes</a>
+				   <br>
+				</div>
+			</div>
+<br>
+ <section id="portfolio" class="portfolio">
+         <div class="container">
+
+             <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
+                 {% for category in categories %}
+                     <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+                         <div class="portfolio-wrap">
+                             <img src="{{ asset('assets/img/recipe/'~category.imgUrl) }}" class="img-fluid" alt="">
+                             <div class="portfolio-info">
+                                 <h4> <a href="{{ path('recipesByCategory',{'id':category.catId}) }}">{{ category.name }}</a>
+                                 </h4>
+                                 <p>12 Recipes</p>
+                                 <div class="portfolio-links">
+                                     <a href="{{ path('recipesByCategory',{'id':category.catId}) }}" title="More Details"><i class="bx bx-link"></i></a>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+
+                 {% endfor %}
+             </div>
+
+         </div>
+     </section>
+</section>
+		{% endblock %}

@@ -1,0 +1,33 @@
+{% block body %}
+
+    {% for recipe in recipes %}
+
+        recipe by CoHeal ® <br>
+        added by a certified nutritionist
+        <br><br><br>
+
+
+        <center><img src="{{ app.request.getSchemeAndHttpHost() ~ asset('assets/img/recipe/'~recipe.imgUrl) }}" width="200px" height="200px" alt="hmmmm"/></center>
+        <br>
+        <center><font color="#ff8c00" size="45"><b>{{ recipe.title}}</b></font></center>
+
+        <center><p><font color="#0b517d">{{ recipe.description }}</font></p></center>
+
+        <hr><br>
+
+        <h2><font color="#ff8c00"> Ingredients :</font></h2><br>
+        &nbsp;&nbsp;&nbsp;<p><font color="#0b517d">{{ recipe.ingredients }}</font></p><br>
+
+        <h2><font color="#ff8c00">Steps to follow :</font></h2><br>
+        &nbsp;&nbsp;&nbsp;<p><font color="#0b517d">{{ recipe.steps }}</font></p>
+
+        <br><hr><br>
+
+
+        <font color="#ff8c00">CALORIES :</font><font color="#0b517d"> {{ recipe.calories }} </font><br><br>
+        <font color="#ff8c00">PREP TIME :</font><font color="#0b517d"> {{ recipe.duration }} min </font><br><br>
+        <font color="#ff8c00">SERVES :</font> <font color="#0b517d">{{ recipe.persons }} persons </font><br><br>
+
+    {% endfor %}
+
+{% endblock %}

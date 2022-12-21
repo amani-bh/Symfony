@@ -1,0 +1,19 @@
+{% extends '/BackOffice/base.html.twig' %}
+
+{% block body %}
+<body class="g-sidenav-show  bg-gray-100">
+<main class="main-content mt-1 border-radius-lg">
+    <div class="container">
+        <div class="robust-content content container-fluid">
+            <div class="content-wrapper">
+                <div id="div_chart"></div>
+
+                <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+                <script type="text/javascript">
+                    {{ gc_draw(piechart, 'div_chart') }}
+                </script>
+
+            </div>
+        </div>
+    </div>
+{% endblock  %}
